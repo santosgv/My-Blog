@@ -2,10 +2,15 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from Core.views import robots
+from Core.views import robots, PostViewSet
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'post', PostViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('',include('Core.urls')),
     path('robots.txt',robots)
 ]

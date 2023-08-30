@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets
 from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponse 
@@ -9,6 +9,7 @@ from .models import Post,URL,Contato
 from django.core.paginator import Paginator
 from django.contrib.messages import constants
 from django.contrib import messages
+from Core.serializers import PostSerielizer
 
 
 def index(request):
@@ -17,6 +18,10 @@ def index(request):
     page_number = request.GET.get('page')
     posts = pagina.get_page(page_number)
     return render(request,'index.html',{'posts':posts})
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerielizer
 
 def postid(request,id):
     post = Post.objects.get(id=id)
