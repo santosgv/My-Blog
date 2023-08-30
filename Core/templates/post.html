@@ -32,7 +32,7 @@
                             <a href="{{post.referencia}}" target="_blank">{{post.referencia}}</a>
                         </p>
                         <blockquote class="blockquote text-center">{{post.texto}}</blockquote>
-                        <a class="text-center" href="{{post.link}}" target="_blank">{{post.link}}</a>
+                        <a class="text-center" href="{% url 'Core:redirecionar' post.link %}" target="_blank">{{post.link}}</a>
                     </div>
                 </div>
             </div>

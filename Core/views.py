@@ -5,8 +5,11 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponse 
 import os
-from .models import Post
+from .models import Post,URL,Contato
 from django.core.paginator import Paginator
+from django.contrib.messages import constants
+from django.contrib import messages
+
 
 def index(request):
     posts_lista = Post.objects.all().order_by('-data')
@@ -21,10 +24,36 @@ def postid(request,id):
                                         })
 
 def about(request):
-     return render(request,'about.html')
+    if request.method == "GET":
+        return render(request,'about.html')
 
 def contact(request):
-     return render(request,'contact.html')
+    if request.method == "GET":
+        status = request.GET.get('status')
+        return render(request,'contact.html',{'status':status})
+    else:
+        NOME = request.POST.get('name')
+        EMAIL = request.POST.get('email')
+        TELEFONE = request.POST.get('phone')
+        MENSAGEM = request.POST.get('message')
+        
+        new_contato= Contato(
+            Nome=NOME,
+            Email=EMAIL,
+            Telefone=TELEFONE,
+            Mensagem=MENSAGEM
+        )
+        new_contato.save()
+        messages.add_message(request, constants.SUCCESS, 'Cadastrado com sucesso')
+        return redirect("/contact/?status=1")
+
+
+def redirecionar(request,link):
+    links = URL.objects.get(short_link=link)
+    
+    if links != None:
+        return redirect(links.link_redirecionado)
+    return HttpResponse('nada')
 
 @cache_page(60 * 15)
 def robots(request):
