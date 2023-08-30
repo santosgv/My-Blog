@@ -12,7 +12,7 @@ from django.contrib import messages
 
 
 def index(request):
-    posts_lista = Post.objects.all().order_by('-data')
+    posts_lista = Post.objects.filter(ativo=True).all().order_by('-data')
     pagina = Paginator(posts_lista, 10)
     page_number = request.GET.get('page')
     posts = pagina.get_page(page_number)

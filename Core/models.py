@@ -14,6 +14,7 @@ class Contato(models.Model):
     Email = models.EmailField()
     Telefone = models.IntegerField()
     Mensagem = models.TextField(max_length=500)
+    Lido = models.BooleanField(default=False)
     
     def __str__(self):
         return self.Nome
@@ -23,7 +24,7 @@ class ImagemTT(models.Model):
 
     @mark_safe
     def icone(self):
-        return f'<img width="30px" src="/media/{self.imagens}">'
+        return f'<img width="30px" src="{self.imagens.url}">'
 
     def __str__(self) -> str:
         return self.imagens.url
@@ -38,6 +39,7 @@ class Post(models.Model):
 
     texto = models.TextField(max_length=500,null=True, blank=True)
     link  = models.ForeignKey(URL, on_delete=models.CASCADE ,null=True, blank=True)
+    ativo = models.BooleanField(default=True)
 
     def __str__(self):
         return self.headline
