@@ -3,12 +3,15 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponse 
 import os
+from .models import Post
 
 def index(request):
-    return render(request,'index.html')
+    posts = Post.objects.all()
+    return render(request,'index.html',{'posts':posts})
 
-def post(request):
-    return render(request,'post.html')
+def postid(request,id):
+    post = Post.objects.get(id=id)
+    return render(request,'post.html',{'post':post})
 
 def about(request):
      return render(request,'about.html')
