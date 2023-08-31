@@ -1,10 +1,24 @@
 from django.db import models
 from django.db.models.fields import CharField
 from django.utils.safestring import mark_safe
+import random
+import string
+
 
 class URL(models.Model):
     link_redirecionado = models.URLField()
-    short_link = models.CharField(max_length=10,unique=True)
+    short_link = models.CharField(max_length=10,unique=True, blank=True)
+
+    def generate_short_link(self):
+        characters = string.ascii_letters + string.digits  # Letras e números
+        return ''.join(random.choice(characters) for _ in range(10))  # Gera uma sequência de 10 caracteres
+
+    def save(self, *args, **kwargs):
+        if not self.short_link:  # Se o short_link ainda não foi definido
+            self.short_link = self.generate_short_link()
+            while URL.objects.filter(short_link=self.short_link).exists():  # Verifica se já existe um objeto com esse short_link
+                self.short_link = self.generate_short_link()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.short_link
