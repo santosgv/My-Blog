@@ -1,19 +1,14 @@
 User-agent: *
 Disallow: /admin
-Disallow: /produto
-Disallow: /ver_carrinho
-Disallow: /finalizar_pedido/
 
 User-agent: Googlebot
 Allow: /$
-Allow: /produto
-Allow: /pricing
-Allow: /termos
-Allow: /politica
+Allow: /
+Allow: /about
+Allow: /contact
 
 User-agent: Bingbot
 Allow: /$
-Allow: /produto
-Allow: /pricing
-Allow: /termos
-Allow: /politica
+Allow: /
+Allow: /about
+Allow: /contact
