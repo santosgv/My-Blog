@@ -31,8 +31,11 @@
                             &middot; Link referente
                             <a href="{{post.referencia}}" target="_blank">{{post.referencia}}</a>
                         </p>
+                        <hr>
                         <blockquote class="blockquote text-center">{{post.texto}}</blockquote>
-                        <a class="text-center" href="{% url 'Core:redirecionar' post.link %}" target="_blank">{{post.link}}</a>
+                        <p class="text-center">
+                            <a class="text-center" href="{% url 'Core:redirecionar' post.link %}" target="_blank">Descrubra !</a>
+                        </p>
                     </div>
                 </div>
             </div>

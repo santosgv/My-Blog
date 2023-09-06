@@ -22,10 +22,11 @@ class ContatoAdmin(admin.ModelAdmin):
 @admin.register(URL)
 class UrlAdmin(admin.ModelAdmin):
     list_display=('link_redirecionado','short_link',)
+    readonly_fields=('short_link',)
     list_filter=('short_link',)
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display=('headline','previa','data','por','texto','link')
+    list_display=('headline','data','por','texto','link')
     list_filter=('data','por','headline','link','ativo')
     actions=[action_mark_false,]
 admin.site.register(ImagemTT)
