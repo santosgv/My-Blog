@@ -22,7 +22,8 @@
                         <h2 class="section-heading text-center">{{post.headline}}</h2>
                         <p class="text-center">{{post.previa}}</p>
                         {% for img in post.imagens.all %}
-                        <a href="{{img}}"><img class="img-fluid" src="{{img}}" alt="{{img}}" /></a>
+                        <hr>
+                        <a href="{{img}}"><img class="img-fluid" src="{{img}}" alt="{{img}}"/></a>
                         {% endfor %}
                         <span class="caption text-muted">{{post.data}}</span>
                         <p class="text-center">
@@ -33,9 +34,11 @@
                         </p>
                         <hr>
                         <blockquote class="blockquote text-center">{{post.texto}}</blockquote>
+                        {% if post.link %}
                         <p class="text-center">
                             <a class="text-center" href="{% url 'Core:redirecionar' post.link %}" target="_blank">Descrubra !</a>
                         </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
