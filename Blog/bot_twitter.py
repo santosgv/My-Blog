@@ -1,10 +1,22 @@
 import tweepy
 from decouple import config
 
+
 client = tweepy.Client(
-    consumer_key=config('API_Key'),
-    consumer_secret=config('API_Key_Secret'),
-    access_token=config('Access_Token'),
-    access_token_secret=config('Access_Token_Secret')
+    config('bearer_token'),
+    config('API_Key'),
+    config('API_Key_Secret'),
+    config('Access_Token'),
+    config('Access_Token_Secret')
 )
-client.create_tweet(text="Test tweet!")
+
+auth = tweepy.OAuth1UserHandler(
+    config('API_Key'),
+    config('API_Key_Secret'),
+    config('Access_Token'),
+    config('Access_Token_Secret')
+                                )
+
+api=tweepy.API(auth)
+
+client.create_tweet(text='Texta')
