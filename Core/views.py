@@ -10,8 +10,9 @@ from django.core.paginator import Paginator
 from django.contrib.messages import constants
 from django.contrib import messages
 from Core.serializers import PostSerielizer
+from django.core.exceptions import ObjectDoesNotExist
 
-
+@cache_page(60 * 15)
 def index(request):
     posts_lista = Post.objects.filter(ativo=True).all().order_by('-data')
     pagina = Paginator(posts_lista, 10)
@@ -27,7 +28,7 @@ def postid(request,id):
     post = Post.objects.get(id=id)
     return render(request,'post.html',{'post':post,
                                         })
-
+@cache_page(60 * 15)
 def about(request):
     if request.method == "GET":
         return render(request,'about.html')
@@ -53,12 +54,13 @@ def contact(request):
         return redirect("/contact/?status=1")
 
 
+@cache_page(60 * 15)
 def redirecionar(request,link):
-    links = URL.objects.get(short_link=link)
-    
-    if links != None:
+    try:
+        links = URL.objects.get(short_link=link)
         return redirect(links.link_redirecionado)
-    return HttpResponse('nada')
+    except ObjectDoesNotExist:
+        return HttpResponse('Link não encontrado')
 
 @cache_page(60 * 15)
 def robots(request):
