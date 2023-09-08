@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block 'body' %}
-<title>{% block 'title' %}
+{% block 'title' %}
 	Principal
-	{% endblock %}</title>
+	{% endblock %}
 
+{% block 'body' %}
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
@@ -38,7 +38,7 @@
                     </span>
             
                     {% if posts.has_next %}
-                        <a class="btn btn-primary text-uppercase" href="?page={{ posts.next_page_number }}">Mais Antigas</a>
+                        <a class="btn btn-primary text-uppercase" href="?page={{ posts.next_page_number }}">Antigos</a>
                         <a href="?page={{ posts.paginator.num_pages }}">Ultima &raquo;</a>
                     {% endif %}
                 </span>
