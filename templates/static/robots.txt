@@ -1,6 +1,7 @@
 User-agent: *
 Disallow: /admin
 Disallow: /admin/Core/post/
+Desallow: /admin/Core/post/*/change/
 Disallow: /README.txt
 
 User-agent: *

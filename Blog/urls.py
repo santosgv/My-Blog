@@ -11,8 +11,8 @@ router.register(r'post', PostViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('robots.txt',robots),
     path('',include('Core.urls')),
-    path('robots.txt',robots)
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
