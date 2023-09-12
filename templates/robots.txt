@@ -1,14 +1,19 @@
 User-agent: *
 Disallow: /admin
+Disallow: /admin/Core/post/
+Disallow: /README.txt
 
-User-agent: Googlebot
+User-agent: *
 Allow: /$
 Allow: /
+Allow: /post/*
 Allow: /about
 Allow: /contact
-
-User-agent: Bingbot
-Allow: /$
-Allow: /
-Allow: /about
-Allow: /contact
+# CSS, JS, Images
+Allow: /static/js/scripts.js
+Allow: /static/css/styles.css
+Allow: /static/assets/img/home-bg.png
+Allow: /static/assets/favicon.ico
+# Paths (no clean URLs)
+Allow: /media/twitter_img/*.png
+Allow: /media/twitter_img/*.jpg
