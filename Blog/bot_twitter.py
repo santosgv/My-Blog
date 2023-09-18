@@ -1,22 +1,22 @@
-import tweepy
+
+from time import sleep
 from decouple import config
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
+driver =  webdriver.Chrome()
 
-client = tweepy.Client(
-    config('bearer_token'),
-    config('API_Key'),
-    config('API_Key_Secret'),
-    config('Access_Token'),
-    config('Access_Token_Secret')
-)
+driver.get('https://www.pelando.com.br/cupons-de-descontos')
 
-auth = tweepy.OAuth1UserHandler(
-    config('API_Key'),
-    config('API_Key_Secret'),
-    config('Access_Token'),
-    config('Access_Token_Secret')
-                                )
+cupoms= driver.find_elements( By.XPATH,"//a[@class='sc-eqUAAy kzHRhw sc-a4b5c454-1 eyQTiv']")
 
-api=tweepy.API(auth)
+for cupom in cupoms:
+    cupom.click()
+    sleep(10)
+    tikets = driver.find_elements(By.XPATH,"//li[@class='sc-3047764d-0 ffXBnY']")
+    for tiket in tikets:
+        print(tiket.text)
+        
+#//span[@role='presentation']
+driver.implicitly_wait(0.5)
 
-client.create_tweet(text='Texta')
