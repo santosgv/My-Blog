@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,ImagemTT, URL,Contato
+from .models import Post,ImagemTT, URL,Contato,Email
 
 @admin.action(description="Marcar como Lido")
 def action_read_messenger(modeladmin,request,queryset):
@@ -30,3 +30,5 @@ class PostAdmin(admin.ModelAdmin):
     list_filter=('data','por','headline','link','ativo')
     actions=[action_mark_false,]
 admin.site.register(ImagemTT)
+
+admin.site.register(Email)

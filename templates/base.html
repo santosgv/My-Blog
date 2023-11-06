@@ -60,52 +60,31 @@
                 </div>
             </div>
         </header>
-        <div class="container justify-content-center adsterra">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : 'ee2232b66a7c5e07f0aafd4d7f0ea286',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-            document.write('<scr' + 'ipt type="text/javascript" src="//www.profitablecreativeformat.com/ee2232b66a7c5e07f0aafd4d7f0ea286/invoke.js"></scr' + 'ipt>');
-        </script>
-           <script type="text/javascript">
-            atOptions = {
-                'key' : 'ee2232b66a7c5e07f0aafd4d7f0ea286',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-            document.write('<scr' + 'ipt type="text/javascript" src="//www.profitablecreativeformat.com/ee2232b66a7c5e07f0aafd4d7f0ea286/invoke.js"></scr' + 'ipt>');
-        </script>
-                   <script type="text/javascript">
-                    atOptions = {
-                        'key' : 'ee2232b66a7c5e07f0aafd4d7f0ea286',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                    document.write('<scr' + 'ipt type="text/javascript" src="//www.profitablecreativeformat.com/ee2232b66a7c5e07f0aafd4d7f0ea286/invoke.js"></scr' + 'ipt>');
-                </script>
-                   <script type="text/javascript">
-                    atOptions = {
-                        'key' : 'ee2232b66a7c5e07f0aafd4d7f0ea286',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                    document.write('<scr' + 'ipt type="text/javascript" src="//www.profitablecreativeformat.com/ee2232b66a7c5e07f0aafd4d7f0ea286/invoke.js"></scr' + 'ipt>');
-                </script>
-        </div>
+
 {% block 'body' %}
 
         {% endblock %}
-    
+        <div class="container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="text-center alert {{message.tags}}">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="newsletter-subscribe mt-5 container">
+            <div class="container">
+                <div class="intro">
+                    <h2 class="text-center newsletter">Assine a nossa newsletter</h2>
+                    <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                </div>
+                <form  action="{% url 'Core:formulario' %}" class="form-inline" method="post">{% csrf_token %} 
+                    <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Seu Email"></div>
+                    <div class="form-group"><button class="btn btn-primary" type="submit">Se inscrever</button></div>
+                </form>
+            </div>
+        </div>
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">
@@ -141,4 +120,89 @@
 <!-- adsterra anti adblock-->
       <script type='text/javascript' src='//indexeslaughter.com/39/95/65/399565f6e07d9e35199881ccacfb801b.js'></script>
     </body>
+    <style>
+        .newsletter-subscribe {
+  color: #313437;
+  background-color: #ffffff;
+  padding: 55px 74px;
+}
+
+.newsletter-subscribe p {
+  color: #7d8285;
+  line-height: 1.5;
+}
+
+.newsletter-subscribe h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  padding-top: 0;
+  margin-top: 0;
+  color: inherit;
+}
+
+.newsletter-subscribe .intro {
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 25px;
+}
+
+.newsletter-subscribe .intro p {
+  margin-bottom: 35px;
+}
+
+.newsletter-subscribe form {
+  justify-content: center;
+}
+
+.newsletter-subscribe form .form-control {
+  background: #eff1f4;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+  text-indent: 9px;
+  height: 45px;
+  margin-right: 10px;
+  min-width: 250px;
+}
+
+.newsletter-subscribe form .btn {
+  padding: 16px 32px;
+  border: none;
+  background: none;
+  box-shadow: none;
+  text-shadow: none;
+  opacity: 0.9;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  line-height: 1;
+}
+
+.newsletter-subscribe form .btn:hover {
+  opacity: 1;
+}
+
+.newsletter-subscribe form .btn:active {
+  transform: translateY(1px);
+}
+
+.newsletter-subscribe form .btn-primary {
+  background-color: #0085A1 !important;
+  color: #fff;
+  outline: none !important;
+}
+
+body {
+  background: #eee;
+}
+
+.newsletter {
+  color: #0085A1 !important;
+}
+    </style>
 </html>

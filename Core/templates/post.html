@@ -25,14 +25,22 @@
                         <a href="{{img}}"><img class="img-fluid" src="{{img}}" alt="{{img}}"/></a>
                         {% endfor %}
                         <span class="caption text-muted">{{post.data}}</span>
+                        {% if post.por or post.referencia %}
                         <p class="text-center">
                             Postado Por
                             <a href="#">{{post.por}}</a>
                             &middot; Link referente
                             <a href="{{post.referencia}}" target="_blank">{{post.referencia}}</a>
                         </p>
+                        {% else %}
+                        <p class="text-center">
+                        </p>
+                        {% endif %}
                         <hr>
+                        {% if post.texto %}
                         <blockquote class="blockquote text-center">"{{post.texto}}"</blockquote>
+                        {% else %}
+                        {% endif %}
                         {% if post.link %}
                         <p class="text-center">
                             <a class="text-center" href="{% url 'Core:redirecionar' post.link %}" target="_blank">Descrubra !</a>

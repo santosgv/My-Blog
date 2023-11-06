@@ -5,14 +5,14 @@ from django.conf import settings
 from django.views.decorators.cache import cache_page
 from django.http import HttpResponse 
 import os
-from .models import Post,URL,Contato
+from .models import Post,URL,Contato,Email
 from django.core.paginator import Paginator
 from django.contrib.messages import constants
 from django.contrib import messages
 from Core.serializers import PostSerielizer
 from django.core.exceptions import ObjectDoesNotExist
 
-@cache_page(60 * 15)
+#@cache_page(60 * 15)
 def index(request):
     posts_lista = Post.objects.filter(ativo=True).all().order_by('-data')
     pagina = Paginator(posts_lista, 10)
@@ -61,6 +61,21 @@ def redirecionar(request,link):
         return redirect(links.link_redirecionado)
     except ObjectDoesNotExist:
         return HttpResponse('Link não encontrado')
+    
+
+def formulario(request):
+    if request.method =="POST":
+        email = request.POST.get('email')
+        valida = Email.objects.filter(email=email)
+        if valida.exists():
+            messages.add_message(request, constants.ERROR, 'Email Ja cadastrado')
+            return redirect("/")
+        cadastrar = Email.objects.create(
+            email=email
+        )
+        cadastrar.save()
+        messages.add_message(request, constants.SUCCESS, 'Cadastrado com sucesso')
+        return redirect("/")
 
 @cache_page(60 * 15)
 def robots(request):

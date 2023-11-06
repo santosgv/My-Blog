@@ -46,7 +46,7 @@ class ImagemTT(models.Model):
 class Post(models.Model):
     headline = models.TextField(max_length=200)
     previa = models.TextField(max_length=200,null=True, blank=True)
-    imagens =models.ManyToManyField (ImagemTT,null=True, blank=True)
+    imagens =models.ManyToManyField (ImagemTT, blank=True)
     data = models.DateField(null=True, blank=True)
     referencia = models.CharField(max_length=200,null=True, blank=True)
     por = models.CharField(max_length=50,null=True, blank=True)
@@ -57,3 +57,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.headline
+    
+class Email(models.Model):
+    email = models.EmailField()
+    ativo = models.BooleanField(default=True)
+
+    def __str__(self) -> str:
+        return self.email

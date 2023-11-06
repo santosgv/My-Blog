@@ -13,6 +13,7 @@ urlpatterns = [
     path("<str:link>",views.redirecionar, name ='redirecionar'),
     path("about/", views.about, name='about'),
     path("contact/", views.contact, name='contact'),
+    path("formulario/", views.formulario, name='formulario'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
