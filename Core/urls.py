@@ -17,6 +17,7 @@ urlpatterns = [
     path('envio/',views.envio,name='envio'),
     path('enviar_emeil/',views.enviar_emeil,name='enviar_emeil'),
     path('unsubscriber/<int:id>',views.unsubscriber,name='unsubscriber'),
+    
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
