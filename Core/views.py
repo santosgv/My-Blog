@@ -11,6 +11,7 @@ from django.contrib.messages import constants
 from django.contrib import messages
 from Core.serializers import PostSerielizer
 from django.core.exceptions import ObjectDoesNotExist
+from .utils import email_html
 
 #@cache_page(60 * 15)
 def index(request):
@@ -50,7 +51,6 @@ def contact(request):
             Mensagem=MENSAGEM
         )
         new_contato.save()
-        messages.add_message(request, constants.SUCCESS, 'Cadastrado com sucesso')
         return redirect("/contact/?status=1")
 
 
@@ -76,6 +76,31 @@ def formulario(request):
         cadastrar.save()
         messages.add_message(request, constants.SUCCESS, 'Cadastrado com sucesso')
         return redirect("/")
+    
+def unsubscriber(request,id):
+    email = Email.objects.get(id=id)
+    email.ativo =False
+    email.save()
+    return HttpResponse('Cancelado sua Inscriçao')
+
+def envio(request):
+    return render(request,'envio.html')
+
+    
+def enviar_emeil(request):
+    try:
+        path_template = os.path.join(settings.BASE_DIR, 'Core/templates/emails/email.html')
+        emails = Email.objects.filter(ativo=True).all()
+        posts = Post.objects.all()[:15]
+
+        for email in emails:
+            #email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email.id)
+            print('Foi enviado')
+            
+        return HttpResponse('Emails enviados para todos os destinatários ativos')
+    except Exception as msg:
+        print(msg)
+        return msg
 
 @cache_page(60 * 15)
 def robots(request):

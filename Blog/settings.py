@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+	'ckeditor',
 	'debug_toolbar',
      'rest_framework',
     'Core',
@@ -154,12 +155,33 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
 }
 
-#DEFAULT_FROM_EMAIL='Vitor Dos Santos | Pagamento'
-#EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST_USER= config('EMAIL_HOST_USER')
-#EMAIL_HOST_PASSWORD= config('EMAIL_HOST_PASSWORD')
-#EMAIL_USE_TLS=True
-#EMAIL_PORT =587
-#EMAIL_HOST='smtp.gmail.com'
+DEFAULT_FROM_EMAIL=config('EMAIL_HOST_USER')
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER= config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD= config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS=True
+EMAIL_PORT =587
+EMAIL_HOST='smtp.office365.com'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = 'https://code.jquery.com/jquery-3.6.0.min.js'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['Link', 'Unlink'],
+            ['NumberedList', 'BulletedList'],
+            ['Image', 'Table'],
+            ['Format', 'RemoveFormat'],
+            ['Source'],
+        ],
+        'width': 800,
+        'height': 300,
+        'tabSpaces': 4,
+    },
+}

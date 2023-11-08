@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Newsletter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="center">
+                <table border="0" cellspacing="0" cellpadding="0" style="max-width: 700px; width: 100%;">
+                    <tr>
+                        <td style="padding: 40px 20px; text-align: center;">
+                            <img src="home-bg.png" alt="Logo" width="100%">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 40px 20px; background-color: #ffffff;">
+                            <h1>Novos Posts</h1>
+                            <p>Olá, Veja algumas das novidades de Hoje!</p>
+                            {% for post in posts %}
+                            <h1>{{ post.headline }}</h1>
+                            <p>{{ post.previa }}</p>
+                            <a href="http://127.0.0.1:8000/post/{{post.id}}">Leia mais</a>
+                            <hr>
+                            <br>
+                            {% endfor %}
+                            <p>Acesse Nossa NewsLetter para Ver mais <a href="http://127.0.0.1:8000/">Blog</a></p>
+                        </td>
+                    </tr>
+                   <tr>
+                    <td class="text-center">
+                        <p>Se você não quer mais receber este email clique</p><a href="http://127.0.0.1:8000/unsubscriber/{{email}}" target="_blank" rel="noopener noreferrer">Cancelar</a>
+                    </td>
+                   </tr>
+                    <tr>
+                        <td style="text-align: center; padding: 20px; background-color: #f7f7f7;">
+                            &copy; 2023 Newsletter. Todos os direitos reservados.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

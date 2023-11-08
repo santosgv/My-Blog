@@ -6,6 +6,7 @@
 	Post
 	{% endblock %}
 
+
     {% block 'body' %}
 
     <nav aria-label="breadcrumb">
@@ -37,10 +38,12 @@
                         </p>
                         {% endif %}
                         <hr>
-                        {% if post.texto %}
-                        <blockquote class="blockquote text-center">"{{post.texto}}"</blockquote>
+                        {% if post.afiliado %}
+                        <blockquote class="blockquote text-center">"{{post.afiliado }}"</blockquote>
                         {% else %}
+                    
                         {% endif %}
+                        {{post.texto|safe }}
                         {% if post.link %}
                         <p class="text-center">
                             <a class="text-center" href="{% url 'Core:redirecionar' post.link %}" target="_blank">Descrubra !</a>

@@ -3,6 +3,7 @@ from django.db.models.fields import CharField
 from django.utils.safestring import mark_safe
 import random
 import string
+from ckeditor.fields import RichTextField
 
 
 class URL(models.Model):
@@ -50,8 +51,8 @@ class Post(models.Model):
     data = models.DateField(null=True, blank=True)
     referencia = models.CharField(max_length=200,null=True, blank=True)
     por = models.CharField(max_length=50,null=True, blank=True)
-
-    texto = models.TextField(max_length=500,null=True, blank=True)
+    afiliado= models.TextField(max_length=500,null=True, blank=True)
+    texto = RichTextField(max_length=3000, null=True, blank=True)
     link  = models.ForeignKey(URL, on_delete=models.CASCADE ,null=True, blank=True)
     ativo = models.BooleanField(default=True)
 
