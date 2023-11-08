@@ -83,8 +83,6 @@ def unsubscriber(request,id):
     email.save()
     return HttpResponse('Cancelado sua Inscriçao')
 
-def envio(request):
-    return render(request,'envio.html')
 
     
 def enviar_emeil(request):

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
                 <table border="0" cellspacing="0" cellpadding="0" style="max-width: 700px; width: 100%;">
                     <tr>
                         <td style="padding: 40px 20px; text-align: center;">
-                            <img src="home-bg.png" alt="Logo" width="100%">
+                            <img src="{% static 'assets/img/home-bg.png' %}" alt="Logo" width="100%">
                         </td>
                     </tr>
                     <tr>
@@ -31,7 +32,8 @@
                     </tr>
                    <tr>
                     <td class="text-center">
-                        <p>Se você não quer mais receber este email clique</p><a href="http://127.0.0.1:8000/unsubscriber/{{email}}" target="_blank" rel="noopener noreferrer">Cancelar</a>
+                        Esse email foi enviado para {{email}}
+                        <p>Se você não quer mais receber este email clique <a href="http://127.0.0.1:8000/unsubscriber/{{email}}" target="_blank" rel="noopener noreferrer">Cancelar</a></p>
                     </td>
                    </tr>
                     <tr>

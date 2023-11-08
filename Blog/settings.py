@@ -216,7 +216,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Welcome to the library",
 
     # Copyright on the footer
-    "copyright": "Acme Library Ltd",
+    "copyright": "Newsletter",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 
@@ -236,7 +236,8 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+		
+        {"name": "Enviar E-mail", "url": "http://127.0.0.1:8000/enviar_emeil/", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
