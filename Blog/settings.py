@@ -213,7 +213,7 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the library",
+    "welcome_sign": "Bem vindo a Area Administrativa",
 
     # Copyright on the footer
     "copyright": "Newsletter",
@@ -237,7 +237,10 @@ JAZZMIN_SETTINGS = {
 
         # external url that opens in a new window (Permissions can be added)
 		
-        {"name": "Enviar E-mail", "url": "http://127.0.0.1:8000/enviar_emeil/", "new_window": True},
+        {"name": "Enviar", "url": "http://127.0.0.1:8000/enviar_emeil/", "new_window": True},
+		
+        {"name": "Site", "url": "/", "new_window": True},
+		
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},

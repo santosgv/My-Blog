@@ -53,7 +53,6 @@ def contact(request):
         new_contato.save()
         return redirect("/contact/?status=1")
 
-
 @cache_page(60 * 15)
 def redirecionar(request,link):
     try:
@@ -83,17 +82,15 @@ def unsubscriber(request,id):
     email.save()
     return HttpResponse('Cancelado sua Inscriçao')
 
-
-    
 def enviar_emeil(request):
     try:
         path_template = os.path.join(settings.BASE_DIR, 'Core/templates/emails/email.html')
         emails = Email.objects.filter(ativo=True).all()
-        posts = Post.objects.all()[:15]
+        posts = Post.objects.all().order_by('-data')[:15]
 
         for email in emails:
-            #email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email.id)
-            print('Foi enviado')
+            email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email)
+            print(f'Foi enviado para {email.email}')
             
         return HttpResponse('Emails enviados para todos os destinatários ativos')
     except Exception as msg:
