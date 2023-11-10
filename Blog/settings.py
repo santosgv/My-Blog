@@ -237,7 +237,7 @@ JAZZMIN_SETTINGS = {
 
         # external url that opens in a new window (Permissions can be added)
 		
-        {"name": "Enviar", "url": "http://127.0.0.1:8000/enviar_emeil/", "new_window": True},
+        {"name": "Enviar", "url": "/enviar_emeil/", "new_window": True},
 		
         {"name": "Site", "url": "/", "new_window": True},
 		
