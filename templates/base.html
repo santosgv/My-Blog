@@ -58,9 +58,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>S
         </header>
-
+<div class="container" style="text-align: center; margin-top: 0px; margin-bottom: 0px;">
+    {% if messages %}
+    {% for message in messages %}
+        <div class="text-center alert {{message.tags}}">
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+</div>
 {% block 'body' %}
 
         {% endblock %}

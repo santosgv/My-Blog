@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
 from django.conf import settings
@@ -24,6 +25,7 @@ def index(request):
     page_number = request.GET.get('page')
     posts = pagina.get_page(page_number)
     return render(request,'index.html',{'posts':posts})
+
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -87,6 +89,7 @@ def unsubscriber(request,id):
     email.save()
     return HttpResponse('Cancelado sua Inscriçao')
 
+@login_required(login_url='/admin/login/?next=/admin/') 
 def enviar_emeil(request):
     try:
         path_template = os.path.join(settings.BASE_DIR, 'Core/templates/emails/email.html')
@@ -96,13 +99,13 @@ def enviar_emeil(request):
 
         for email in emails:
             email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email,base_url=base_url)
-            print('foi')
-            
-        return HttpResponse('Emails enviados para todos os destinatários ativos')
+            messages.add_message(request, constants.SUCCESS, 'Cadastrado com sucesso')
+            return redirect("/")
+        
     except Exception as msg:
-        print(msg)
+        messages.add_message(request, constants.ERROR, f'{msg}')
         logger.critical(msg)
-        return msg
+        return redirect("/")
 
 @cache_page(60 * 15)
 def robots(request):
