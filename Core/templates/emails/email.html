@@ -23,17 +23,17 @@
                             {% for post in posts %}
                             <h1>{{ post.headline }}</h1>
                             <p>{{ post.previa }}</p>
-                            <a href="http://127.0.0.1:8000/post/{{post.id}}">Leia mais</a>
+                            <a href="{{base_url}}post/{{post.id}}">Leia mais</a>
                             <hr>
                             <br>
                             {% endfor %}
-                            <p>Acesse Nossa NewsLetter para Ver mais <a href="http://127.0.0.1:8000/">Blog</a></p>
+                            <p>Acesse Nossa NewsLetter para Ver mais <a href="{{base_url}}">Blog</a></p>
                         </td>
                     </tr>
                    <tr>
                     <td class="text-center">
                         Esse email foi enviado para {{email}}
-                        <p>Se você não quer mais receber este email clique <a href="http://127.0.0.1:8000/unsubscriber/{{email.id}}" target="_blank" rel="noopener noreferrer">Cancelar</a></p>
+                        <p>Se você não quer mais receber este email clique <a href="{{base_url}}unsubscriber/{{email.id}}" target="_blank" rel="noopener noreferrer">Cancelar</a></p>
                     </td>
                    </tr>
                     <tr>

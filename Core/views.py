@@ -12,6 +12,10 @@ from django.contrib import messages
 from Core.serializers import PostSerielizer
 from django.core.exceptions import ObjectDoesNotExist
 from .utils import email_html
+from django.urls import reverse
+import logging
+
+logger = logging.getLogger('MyApp')
 
 #@cache_page(60 * 15)
 def index(request):
@@ -29,6 +33,7 @@ def postid(request,id):
     post = Post.objects.get(id=id)
     return render(request,'post.html',{'post':post,
                                         })
+
 @cache_page(60 * 15)
 def about(request):
     if request.method == "GET":
@@ -85,16 +90,18 @@ def unsubscriber(request,id):
 def enviar_emeil(request):
     try:
         path_template = os.path.join(settings.BASE_DIR, 'Core/templates/emails/email.html')
+        base_url = request.build_absolute_uri('/')
         emails = Email.objects.filter(ativo=True).all()
         posts = Post.objects.all().order_by('-data')[:15]
 
         for email in emails:
-            email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email)
-            print(f'Foi enviado para {email.email}')
+            email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email,base_url=base_url)
+            print('foi')
             
         return HttpResponse('Emails enviados para todos os destinatários ativos')
     except Exception as msg:
         print(msg)
+        logger.critical(msg)
         return msg
 
 @cache_page(60 * 15)
