@@ -34,13 +34,13 @@
                     <li class="page-item">
                         <a class="page-link" href="?page=1">Primeira</a>
                     </li>
-                    <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}">Voltar</a>
                     {% endif %}
                   </li>
                   <li class="page-item"><a class="page-link" href="#">{{ posts.number }} : {{ posts.paginator.num_pages }}</a></li>
                   {% if posts.has_next %}
                   <li class="page-item">
-                    <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+                    <a class="page-link" href="?page={{ posts.next_page_number }}">Proxima</a>
                   </li>
                   <li class="page-item">
                     <a class="page-link" href="?page={{ posts.paginator.num_pages }}">Ultima</a>
