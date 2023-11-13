@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
@@ -13,10 +14,15 @@ from django.contrib import messages
 from Core.serializers import PostSerielizer
 from django.core.exceptions import ObjectDoesNotExist
 from .utils import email_html
-from django.urls import reverse
+from django.utils.timezone import now
 import logging
 
 logger = logging.getLogger('MyApp')
+
+
+def get_today_data():
+    date_now  = datetime.datetime.now().date()
+    return date_now
 
 #@cache_page(60 * 15)
 def index(request):
@@ -66,6 +72,7 @@ def redirecionar(request,link):
         links = URL.objects.get(short_link=link)
         return redirect(links.link_redirecionado)
     except ObjectDoesNotExist:
+        logger.info(f'Link não encontrado '+str(datetime.datetime.now())+' horas!')
         return HttpResponse('Link não encontrado')
     
 
@@ -75,6 +82,7 @@ def formulario(request):
         valida = Email.objects.filter(email=email)
         if valida.exists():
             messages.add_message(request, constants.ERROR, 'Email Ja cadastrado')
+            logger.info(f'Email Ja cadastrado {email} '+str(datetime.datetime.now())+' horas!')
             return redirect("/")
         cadastrar = Email.objects.create(
             email=email
@@ -95,16 +103,16 @@ def enviar_emeil(request):
         path_template = os.path.join(settings.BASE_DIR, 'Core/templates/emails/email.html')
         base_url = request.build_absolute_uri('/')
         emails = Email.objects.filter(ativo=True).all()
-        posts = Post.objects.all().order_by('-data')[:15]
+        posts = Post.objects.all().filter(data=get_today_data()).order_by('-data')[:15]
 
         for email in emails:
             email_html(path_template, 'Novos Posts', [email,],posts=posts,email=email,base_url=base_url)
-            messages.add_message(request, constants.SUCCESS, 'Cadastrado com sucesso')
+            messages.add_message(request, constants.SUCCESS, 'Emais enviados com sucesso')
             return redirect("/")
         
     except Exception as msg:
-        messages.add_message(request, constants.ERROR, f'{msg}')
-        logger.critical(msg)
+        messages.add_message(request, constants.ERROR, f'Nao foi possivel enviar os Emails consulte o arquivo de Log')
+        logger.critical(f'{msg} '+str(datetime.datetime.now())+' horas!')
         return redirect("/")
 
 @cache_page(60 * 15)
@@ -117,3 +125,4 @@ def robots(request):
         path = os.path.join(settings.BASE_DIR,'templates/static/robots.txt')
         with open(path,'r') as arq:
             return HttpResponse(arq, content_type='text/plain')
+        
