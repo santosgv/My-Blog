@@ -24,7 +24,7 @@ def get_today_data():
     date_now  = datetime.datetime.now().date()
     return date_now
 
-#@cache_page(60 * 15)
+@cache_page(60 * 15)
 def index(request):
     posts_lista = Post.objects.filter(ativo=True).all().order_by('-data')
     pagina = Paginator(posts_lista, 10)
