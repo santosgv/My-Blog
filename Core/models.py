@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 import random
 import string
 from ckeditor.fields import RichTextField
+from django.utils.safestring import mark_safe
 
 
 class URL(models.Model):
@@ -39,7 +40,7 @@ class ImagemTT(models.Model):
 
     @mark_safe
     def icone(self):
-        return f'<img width="30px" src="{self.imagens.url}">'
+        return f'<img width="80px" src="{self.imagens.url}">'
 
     def __str__(self) -> str:
         return self.imagens.url

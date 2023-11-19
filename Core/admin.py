@@ -29,6 +29,10 @@ class PostAdmin(admin.ModelAdmin):
     list_display=('headline','data','por','link')
     list_filter=('data','por','headline','link','ativo')
     actions=[action_mark_false,]
-admin.site.register(ImagemTT)
+
+@admin.register(ImagemTT)
+class ImagenAdmin(admin.ModelAdmin):
+    list_display = ('icone','imagens')
+
 
 admin.site.register(Email)
