@@ -24,6 +24,12 @@ if not DEBUG:
 
 ALLOWED_HOSTS = ['*']
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+    'localhost',
+    ''
+]
+
 
 # Application definition
 
@@ -50,6 +56,8 @@ MIDDLEWARE = [
 	'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.middleware.cache.UpdateCacheMiddleware',
+	'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'Blog.urls'
@@ -83,6 +91,14 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": 'redis://191.252.210.233:6379/0',
+	    "TIMEOUT": 60,
+    }
+}
+CACHE_MIDDLEWARE_SECONDS = 30
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
