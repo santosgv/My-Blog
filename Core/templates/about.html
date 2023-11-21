@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cache %}
 {% load static %}
 
 
@@ -33,7 +34,7 @@
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                       <div class="col-md-4">
-                        <img src="{% static 'assets/img/foto.jpeg' %}" width="180px" height="180px" alt="...">
+                        <img src="{% static 'assets/img/foto.webp' %}" width="180px" height="180px" alt="...">
                       </div>
                       <div class="col-md-8">
                         <div class="card-body" style="padding-left: 40px;">
