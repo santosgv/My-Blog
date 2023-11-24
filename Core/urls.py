@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -14,8 +14,9 @@ urlpatterns = [
     path("about/", views.about, name='about'),
     path("contact/", views.contact, name='contact'),
     path("formulario/", views.formulario, name='formulario'),
-    path('enviar_emeil/',views.enviar_emeil,name='enviar_emeil'),
-    path('unsubscriber/<int:id>',views.unsubscriber,name='unsubscriber'),
+    path('enviar_emeil/',views.enviar_emeil, name='enviar_emeil'),
+    path('unsubscriber/<int:id>',views.unsubscriber, name='unsubscriber'),
+    path('my_links/',views.my_links, name='my_links'),
     
 ]
 

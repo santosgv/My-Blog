@@ -126,3 +126,5 @@ def robots(request):
         with open(path,'r') as arq:
             return HttpResponse(arq, content_type='text/plain')
         
+def my_links(request):
+    return render(request,'my_links.html')
