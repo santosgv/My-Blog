@@ -125,6 +125,16 @@ def robots(request):
         path = os.path.join(settings.BASE_DIR,'templates/static/robots.txt')
         with open(path,'r') as arq:
             return HttpResponse(arq, content_type='text/plain')
+
+def ads(request):
+    if not settings.DEBUG:
+        path = os.path.join(settings.STATIC_ROOT,'ads.txt')
+        with open(path,'r') as arq:
+            return HttpResponse(arq, content_type='text/plain')
+    else:
+        path = os.path.join(settings.BASE_DIR,'templates/static/ads.txt')
+        with open(path,'r') as arq:
+            return HttpResponse(arq, content_type='text/plain')
         
 def my_links(request):
     return render(request,'my_links.html')
