@@ -91,13 +91,13 @@ DATABASES = {
     }
 }
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": 'redis://191.252.210.233:6379/0',
-	    "TIMEOUT": 60,
-    }
-}
+#CACHES = {
+#    "default": {
+#        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#        "LOCATION": 'redis://191.252.210.233:6379/0',
+#	    "TIMEOUT": 60,
+#    }
+#}
 CACHE_MIDDLEWARE_SECONDS = 30
 
 # Password validation
