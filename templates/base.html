@@ -94,7 +94,7 @@
                 </div>
                 <form  action="{% url 'Core:formulario' %}" class="form-inline" method="post">{% csrf_token %} 
                     <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Seu Email"></div>
-                    <div class="form-group"><button class="btn btn-primary" type="submit">Se inscrever</button></div>
+                    <div class="form-group"><button class="btn btn-primary" type="submit" id="getLocation">Se inscrever</button></div>
                 </form>
             </div>
         </div>
@@ -216,4 +216,66 @@ body {
   color: #0085A1 !important;
 }
     </style>
+
+<script>
+    document.getElementById('getLocation').addEventListener('click', function() {
+        const statusElement = document.getElementById('locationStatus');
+        
+        if (!navigator.geolocation) {
+            statusElement.textContent = "Geolocalização não é suportada pelo seu navegador";
+            return;
+        }
+
+        statusElement.textContent = "Obtendo localização...";
+        
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                // Sucesso - enviar para o servidor
+                sendToServer(position.coords.latitude, position.coords.longitude);
+                statusElement.textContent = "Localização obtida com sucesso!";
+            },
+            function(error) {
+                // Erro
+                let message = "Erro ao obter localização: ";
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        message += "Usuário negou a solicitação de geolocalização.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        message += "Informação de localização indisponível.";
+                        break;
+                    case error.TIMEOUT:
+                        message += "A solicitação de localização expirou.";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        message += "Ocorreu um erro desconhecido.";
+                        break;
+                }
+                statusElement.textContent = message;
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        );
+    });
+
+    function sendToServer(latitude, longitude) {
+        fetch('/save-location/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                latitude: latitude,
+                longitude: longitude
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log('Localização salva:', data))
+        .catch(error => console.error('Erro:', error));
+    }
+</script>
 </html>

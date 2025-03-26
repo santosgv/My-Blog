@@ -15,6 +15,9 @@ from Core.serializers import PostSerielizer
 from django.core.exceptions import ObjectDoesNotExist
 from .utils import email_html
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
 import logging
 
 logger = logging.getLogger('MyApp')
@@ -138,3 +141,22 @@ def ads(request):
         
 def my_links(request):
     return render(request,'my_links.html')
+
+
+@csrf_exempt  # Para simplificar o exemplo (em produção, use proteção CSRF adequada)
+def save_location(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            latitude = float(data['latitude'])
+            longitude = float(data['longitude'])
+            
+            print(latitude,longitude)
+
+            
+            return JsonResponse({'status': 'success', 'message': 'Localização salva'})
+        
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    
+    return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)

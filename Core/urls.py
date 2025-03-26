@@ -17,6 +17,7 @@ urlpatterns = [
     path('enviar_emeil/',views.enviar_emeil, name='enviar_emeil'),
     path('unsubscriber/<int:id>',views.unsubscriber, name='unsubscriber'),
     path('my_links/',views.my_links, name='my_links'),
+    path('save-location/', views.save_location, name='save_location'),
     
 ]
 
